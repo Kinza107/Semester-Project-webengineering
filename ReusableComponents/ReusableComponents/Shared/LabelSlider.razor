@@ -1,0 +1,30 @@
+﻿<input type="range" min="@Min" max="@Max" @bind-value="@CurrentValue" @bind-value:event="oninput"/>
+<span>@CurrentValue</span>
+
+@code {
+    [Parameter]
+    public int Min { get; set; }
+
+    [Parameter]
+    public int Max { get; set; }
+
+    private int _currentValue;
+
+    [Parameter]
+    public int CurrentValue
+    {
+        get => _currentValue;
+        set
+        {
+            if (value != _currentValue)
+            {
+                _currentValue = value;
+                CurrentValueChanged?.Invoke(value);
+            }
+        }
+    }
+
+    [Parameter]
+    public Action<int> CurrentValueChanged { get; set; }
+    
+}
